@@ -27,10 +27,32 @@ powerData <-
 |Sub_metering_2        |double    |0, 0, 0, 0, 0, 0                                           |
 |Sub_metering_3        |double    |0, 0, 0, 0, 0, 0                                           |
 
+The two colums *Date* and *Time* would be better combined and converted to a date/time.
 
+```
+    powerData <- unite(powerData, DateTime, c(Date, Time), remove = TRUE, sep =":")
+    # Now change the Date values into date types
+    powerData %<>% mutate(DateTime=mdy_hms(DateTime))
+```
+Now the separate date and time have been combined into a POSIXct date/time class
+
+|Variable              |Class  |Values                                                                    |
+|:---------------------|:-------|:------------------------------------------------------------------------|
+|DateTime              |POSIXct |2007-01-01 00:00:00, 2007-01-01 00:01:00, 2007-01-01 00:02:00,  00:05:00 |
+|Global_active_power   |double  |2.58, 2.552, 2.55, 2.55, 2.554, 2.55                                     |
+|Global_reactive_power |double  |0.136, 0.1, 0.1, 0.1, 0.1, 0.1                                           |
+|Voltage               |double  |241.97, 241.75, 241.64, 241.71, 241.98, 241.83                           |
+|Global_intensity      |double  |10.6, 10.4, 10.4, 10.4, 10.4, 10.4                                       |
+|Sub_metering_1        |double  |0, 0, 0, 0, 0, 0                                                         |
+|Sub_metering_2        |double  |0, 0, 0, 0, 0, 0                                                         |
+|Sub_metering_3        |double  |0, 0, 0, 0, 0, 0                                                         |
+> 
 ## Notes
 
 1. Extra libraries used:
+    - *lubridate*
+    - *tidyr*
+    - *dplyr*
     - *knitr*
     - *magrittr*
     - *sqldf*
