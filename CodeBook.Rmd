@@ -3,4 +3,44 @@
 The repository was cloned from [ExData_Plotting1](https://github.com/rdpeng/ExData_Plotting1). The REAME.md file contains the 
 assignment instructions and links to the dataset.
 
- 
+## Reading data
+
+The first step is to read in the data. The read was done using the *sqldf* package. This also circumvents the issue with 
+*?* since the target dataset doesn't contain any. There wwere 2880 observations of 9 variables. The types, names, and sample
+values are show below in table format.
+
+```
+powerData <- 
+    read.csv.sql(file = "household_power_consumption.txt",
+    sql = "select * from file where [Date] == '1/1/2007' or [Date] == '1/2/2007'", sep = ';')
+```
+
+|Variable              |Class     |Values                                                     |
+|:---------------------|:---------|:----------------------------------------------------------|
+|Date                  |character |1/1/2007, 1/1/2007, 1/1/2007, 1/1/2007, 1/1/2007, 1/1/2007 |
+|Time                  |character |00:00:00, 00:01:00, 00:02:00, 00:03:00, 00:04:00, 00:05:00 |
+|Global_active_power   |double    |2.58, 2.552, 2.55, 2.55, 2.554, 2.55                       |
+|Global_reactive_power |double    |0.136, 0.1, 0.1, 0.1, 0.1, 0.1                             |
+|Voltage               |double    |241.97, 241.75, 241.64, 241.71, 241.98, 241.83             |
+|Global_intensity      |double    |10.6, 10.4, 10.4, 10.4, 10.4, 10.4                         |
+|Sub_metering_1        |double    |0, 0, 0, 0, 0, 0                                           |
+|Sub_metering_2        |double    |0, 0, 0, 0, 0, 0                                           |
+|Sub_metering_3        |double    |0, 0, 0, 0, 0, 0                                           |
+
+
+## Notes
+
+1. Extra libraries used:
+    - *knitr*
+    - *magrittr*
+    - *sqldf*
+
+2. Method of reproducing the str() function so you can print a nice table. Thanks to Martin Weber on 
+[stack overflow](https://stackoverflow.com/questions/44200394/show-str-as-table-in-r-markdown)
+
+```
+data.frame(Variable = names(powerData), 
+    Class = sapply(powerData, typeof), Values = sapply(powerData, 
+    function(x) paste0(head(x), collapse = ", ")),
+    row.names = NULL) %>% kable()
+```
