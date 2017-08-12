@@ -1,0 +1,6 @@
+# CodeBook for the Week One EDA Project
+
+The repository was cloned from [ExData_Plotting1](https://github.com/rdpeng/ExData_Plotting1). The REAME.md file contains the 
+assignment instructions and links to the dataset.
+
+ 
