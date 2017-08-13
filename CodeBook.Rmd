@@ -70,6 +70,7 @@ lines(as.POSIXlt(powerData$DateTime), powerData$Sub_metering_2, type="l", col = 
 lines(as.POSIXlt(powerData$DateTime), powerData$Sub_metering_3, type="l", col = "blue")
 dev.off()
 ```
+![Plot3](plot3.png)
 # Plot4
 
 ## Notes
