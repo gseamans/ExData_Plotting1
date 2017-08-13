@@ -10,7 +10,7 @@ powerData <-
 powerData <- unite(powerData, DateTime, c(Date, Time), remove = TRUE, sep =":")
 
 # Now change the Date values into date types
-powerData %<>% mutate(DateTime=mdy_hms(DateTime))
+powerData %<>% mutate(DateTime=dmy_hms(DateTime))
 
 # Create an write out the plot
 png(filename = "plot1.png", width = 480, height = 480, units = "px", pointsize = 12, bg="white")

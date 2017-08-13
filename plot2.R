@@ -10,7 +10,9 @@ powerData <-
 powerData <- unite(powerData, DateTime, c(Date, Time), remove = TRUE, sep =":")
 
 # Now change the Date values into date types
-powerData %<>% mutate(DateTime=mdy_hms(DateTime))
+powerData %<>% mutate(DateTime=dmy_hms(DateTime))
 
 # Create an write out the plot
 png(filename = "plot2.png", width = 480, height = 480, units = "px", pointsize = 12, bg="white")
+plot(as.POSIXlt(powerData$DateTime), powerData$Global_active_power, type="l", xlab="", ylab="Global Active Power (kilowatts)")
+dev.off()
