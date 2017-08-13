@@ -10,7 +10,11 @@ powerData <-
 powerData <- unite(powerData, DateTime, c(Date, Time), remove = TRUE, sep =":")
 
 # Now change the Date values into date types
-powerData %<>% mutate(DateTime=mdy_hms(DateTime))
+powerData %<>% mutate(DateTime=dmy_hms(DateTime))
 
 # Create an write out the plot
 png(filename = "plot3.png", width = 480, height = 480, units = "px", pointsize = 12, bg="white")
+plot(as.POSIXlt(powerData$DateTime), powerData$Sub_metering_1, type="l", xlab="", ylab="Energy sub metering")
+lines(as.POSIXlt(powerData$DateTime), powerData$Sub_metering_2, type="l", col = "red")
+lines(as.POSIXlt(powerData$DateTime), powerData$Sub_metering_3, type="l", col = "blue")
+dev.off()
